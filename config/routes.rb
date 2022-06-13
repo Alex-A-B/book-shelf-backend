@@ -1,8 +1,16 @@
 Rails.application.routes.draw do
   resources :bookshelves
   resources :comments
-  resources :books
-  resources :users
+  resources :books, only: [:create]
+
+  resources :users, only: [:update, :destroy]
+
+  get "/me", to: "users#show"
+  post "/signup", to: "users#create"
+
+  post "/login", to: "sessions#create"
+  delete "/logout", to: "sessions#destroy"
+
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
  
