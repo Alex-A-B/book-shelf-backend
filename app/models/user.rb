@@ -2,7 +2,7 @@ class User < ApplicationRecord
     
     has_secure_password
 
-    validates :username, uniqueness: true
+    validates :username, uniqueness: true ##make more robust validations rather than basic
     validates :email, uniqueness: true
     
     #alias has_many connections
