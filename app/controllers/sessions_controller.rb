@@ -8,7 +8,7 @@ class SessionsController < ApplicationController
         if user&.authenticate(params[:password])
             #set session and redirect on success
             session[:user_id] = user.id
-            render json: user, status: :accepted
+            render json: UserSerializer.new(user), status: :accepted
         else
             render json: { error: "Invalid username or password"}, status: :unauthorized
         end
