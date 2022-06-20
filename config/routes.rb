@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   resources :bookshelves
   resources :comments
-  resources :books, only: [:create]
+  resources :books # , only: [:create, ]
 
   resources :users, only: [:update, :destroy]
 

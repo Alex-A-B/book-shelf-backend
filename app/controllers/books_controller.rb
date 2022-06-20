@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
 
-    skip_before_action :authorized!, only [:index, :show]
+    skip_before_action :authorized!, only: [:index, :show]
     # CREATE/VIEW methods only
     # Admin delete/update method? #stretch
 
@@ -15,7 +15,7 @@ class BooksController < ApplicationController
     end
 
     def create
-        book = Book.create!(book_params)
+        book = Book.find_or_create_by!(book_params)
         render json: book, status: :created
     end
 
