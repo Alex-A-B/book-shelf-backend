@@ -15,7 +15,7 @@ class BooksController < ApplicationController
     end
 
     def create
-        book = Book.find_or_create_by!(book_params)
+        book = current_user.shelved_books.find_or_create_by!(params[:book_params])
         render json: book, status: :created
     end
 
