@@ -27,7 +27,7 @@ class BooksController < ApplicationController
                 shelf.ownership_source = "Not yet owned"
                 shelf.preferred_cover_image = nil
             end
-            render json: BookSerializer.new(book) #, {params: {current_user: @current_user}}), status: :created #new serializer required?
+            render json: BookSerializer.new(book), status: :created
         else
             render json: { error: book.error.full_messages }, status: :unprocessable_entity
         end
