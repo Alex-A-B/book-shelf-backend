@@ -15,13 +15,19 @@ class BooksController < ApplicationController
     end
 
     def create
-        book = @current_user.shelved_books.where(:author => book_params[:author], :title => book_params[:title]).first_or_create! do |book|
+        book = Book.where(:author => book_params[:author], :title => book_params[:title]).first_or_create! do |book|
             book.image_url = book_params[:image_url]
             book.synopsis = book_params[:synopsis]
             book.genre = book_params[:genre]
             end
         if book 
-            render json: BookSerializer.new(book), status: :created #new serializer required
+            @current_user.bookshelves.where(:book_id => book.id).first_or_create! do |shelf|
+                shelf.read = false
+                shelf.owned = false
+                shelf.ownership_source = "Not yet owned"
+                shelf.preferred_cover_image = nil
+            end
+            render json: BookSerializer.new(book) #, {params: {current_user: @current_user}}), status: :created #new serializer required?
         else
             render json: { error: book.error.full_messages }, status: :unprocessable_entity
         end

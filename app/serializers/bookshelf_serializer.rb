@@ -1,7 +1,9 @@
 class BookshelfSerializer
   include JSONAPI::Serializer
-  attributes :id, :user_id, :book_id, :read, :owned, :ownership_source, :preferred_cover_image
+  attributes :id, :user_id, :book_id, :book, :read, :owned, :ownership_source, :preferred_cover_image
 
-  belongs_to :user
-  belongs_to :book
+  attribute :book do |object|
+    BookSerializer.new(object.book)
+  end
+
 end
