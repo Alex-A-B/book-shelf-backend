@@ -2,8 +2,8 @@ class BookshelvesController < ApplicationController
 
     #to have full CRUD methods
     def index
-        shelves = Bookshelf.all.includes(:user)
-        render json: shelves
+        shelves = @current_user.Bookshelf.all
+            render json: shelves
     end
 
     def show

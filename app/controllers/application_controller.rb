@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::API
     include ActionController::Cookies   
     rescue_from ActiveRecord::RecordNotFound, with: :no_route
+    rescue_from ActiveRecord::RecordInvalid, with: :invalid_error
     before_action :authorized!
     wrap_parameters format: []
 
@@ -15,8 +16,11 @@ class ApplicationController < ActionController::API
     end
 
     def no_route
-        render json: {error: "Not authorized"}, status: :unauthorized unless session.include?(:user_id)
+        render json: { error: "Not authorized" }, status: :unauthorized unless session.include?(:user_id)
     end
-
+    
+    def invalid_error(invalid)
+        render json: { errors: invalid.record.errors.full_messages }, status: :unprocessable_entity
+    end
 
 end
