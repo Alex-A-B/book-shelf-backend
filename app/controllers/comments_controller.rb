@@ -7,23 +7,27 @@ class CommentsController < ApplicationController
     end
 
     def show
-        comment = Comment.find_by_id(id: params[:id])
+        comment = Comment.find_by(id: params[:id])
         render json: comment
     end
 
     def create
-        comment = Comment.create!(comment_params)
-        render json: comment, status: :created
+        book = Book.find_by(id: params[:id])
+        if book
+           comment = @current_user.comment.create!(comment_params)
+            render json: comment, status: :created
+        else
+            render json: { error: comment.error.full_messages }, status: :unprocessable_entity
     end
 
     def update 
-        comment = Comment.find_by_id(id: params[:id])
+        comment = Comment.find_by(id: params[:id])
         comment.update(comment_params)
         render json: comment
     end
 
     def destroy
-        comment = Comment.find_by_id(id: params[:id])
+        comment = Comment.find_by(id: params[:id])
         comment.destroy
         head :no_content
     end
