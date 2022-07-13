@@ -19,7 +19,7 @@ class BookshelvesController < ApplicationController
     def update 
         shelf = Bookshelf.find_by(id: params[:id])
         shelf.update(shelf_params)
-        render json: shelf
+        render json: BookshelfSerializer.new(shelf)
     end
 
     def destroy
@@ -32,6 +32,6 @@ class BookshelvesController < ApplicationController
 
     def shelf_params
         #to edit down dependent on prefered create route, preferred cover image being moved to Active Storage
-        params.permit(:user_id, :book_id, :read, :owned, :ownership_source, :preferred_cover_image) 
+        params.permit(:id, :user_id, :book_id, :read, :owned, :ownership_source, :preferred_cover_image) 
     end
 end
