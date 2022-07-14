@@ -18,6 +18,7 @@ class CommentsController < ApplicationController
             render json: comment, status: :created
         else
             render json: { error: comment.error.full_messages }, status: :unprocessable_entity
+        end
     end
 
     def update 
