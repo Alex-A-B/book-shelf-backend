@@ -9,8 +9,10 @@ class User < ApplicationRecord
     #alias has_many connections
     has_many :bookshelves
     has_many :comments
+    has_many :ratings
     has_many :commented_books, through: :comments, source: :book
     has_many :shelved_books, through: :bookshelves, source: :book
+    has_many :rated_books, through: :ratings, source: :book
 
 
 end

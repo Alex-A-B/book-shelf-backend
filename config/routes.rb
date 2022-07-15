@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :ratings
   resources :bookshelves
   resources :comments
   resources :books # , only: [:create, ]
@@ -10,6 +11,8 @@ Rails.application.routes.draw do
 
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
+
+  get "/myratings", to: "ratings#my_ratings"
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 

@@ -2,7 +2,7 @@ class BookshelvesController < ApplicationController
 
     #to have full CRUD methods
     def index
-        shelves = @current_user.Bookshelf.all
+        shelves = @current_user.bookshelves.all
             render json: shelves
     end
 
