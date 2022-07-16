@@ -14,7 +14,7 @@ RSpec.describe Rating, type: :model do
     subject.rating="6"
     expect(subject).to_not be_valid
   end
-  it "is not valid without a book)_id" do
+  it "is not valid without a book_id" do
     subject.book_id=nil
     expect(subject).to_not be_valid
   end
