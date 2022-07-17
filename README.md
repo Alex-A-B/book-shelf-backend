@@ -1,24 +1,18 @@
-# README
+# Book it - a reading library management app.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Front end - [here](https://github.com/Alex-A-B/book-shelf-frontend)
+Back end - [here](https://github.com/Alex-A-B/book-shelf-backend)
 
-Things you may want to cover:
+The back end is a Rails API back end with rspec testing enabled.
 
-* Ruby version
+You can run it via:
 
-* System dependencies
+``` bundle install ```
 
-* Configuration
+The back end app will run on localhost:3000 in development mode 
 
-* Database creation
+You will need to ensure Postgres is installed within your local set up to run the database.
 
-* Database initialization
+Once the postgresql service is running you can use rails commands to migrate the database.
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+``` rails db:migrate db:seed ```
